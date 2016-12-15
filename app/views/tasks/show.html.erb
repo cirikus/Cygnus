@@ -1,0 +1,6 @@
+<div class="col-sm-11 col-xs-12 blog-content">
+  <h2 class="text-left"><%= @task.title %></h2>
+  <h5 class="text-left"><%= @task.created_at.strftime('%b %d, %Y') %></h5>
+  <div><%= raw @task.body %></div>
+<div>
+<%= render "tasks/buttons" %>  
