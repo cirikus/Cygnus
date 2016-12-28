@@ -47,6 +47,7 @@ class TasksController < ApplicationController
 
   # The show action renders the individual task after retrieving the the id
   def show
+    @comments = Comment.where(task_id: params[:id])
   end
 
   # The destroy action removes the task permanently from the database

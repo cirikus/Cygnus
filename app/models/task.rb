@@ -3,6 +3,7 @@ class Task < ApplicationRecord
     validates :title, presence: true, length: {maximum: 140}
     #This validates presence of body
     validates :body, presence: true
+    has_many :comments, dependent: :destroy
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|

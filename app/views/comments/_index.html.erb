@@ -1,0 +1,15 @@
+<% if @comments.count == 0 %>
+    No Result
+<% else %>
+    <div class = "container">
+        <h6><%= @comments.count %> comment(s)</h6>
+        <% @comments.each do |comment| %>
+            <blockquote>
+                <p><%= comment.content %></p>
+                <footer>
+                    <h6><em>Created at <%= comment.created_at.strftime('%d %B %Y') %>&nbsp;&nbsp;/&nbsp;&nbsp;Updated at <%= comment.updated_at.strftime('%d %B %Y') %></em></h6>
+                </footer>
+            </blockquote>
+        <% end %>
+    </div>
+<% end %>

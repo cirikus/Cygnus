@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216104043) do
+ActiveRecord::Schema.define(version: 20161216153135) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -47,12 +47,21 @@ ActiveRecord::Schema.define(version: 20161216104043) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_comments_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.datetime "recorded_at"
+    t.index ["id", "created_at"], name: "index_tasks_on_id_and_created_at"
   end
 
 end
