@@ -2,7 +2,12 @@
     <div class = "container">
         <h6><u><%= @comments.count %> comment(s)</u></h6>
         <% @comments.each do |comment| %>
-                <p><strong><%= comment.created_at.strftime('%d %B %Y') %> at <%= comment.created_at.strftime('%H:%M') %></strong>: <%= comment.content %></p>
+                <p>
+                	<strong><%= comment.created_at.strftime('%d %B %Y') %> at <%= comment.created_at.strftime('%H:%M') %></strong>: <%= comment.content %>
+                	<% if admin_signed_in? %>
+                    	<%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, task_comment_path(comment.task_id, comment.id),:method => :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-xs btn-danger" %>
+                    <% end %>	
+                </p>
         <% end %>
     </div>
 <% end %>
