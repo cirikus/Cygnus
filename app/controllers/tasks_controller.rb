@@ -2,6 +2,7 @@ class TasksController < ApplicationController
    
    before_action :authenticate_admin!, except: [:index, :show] 
    before_action :find_task, only: [:edit, :update, :show, :delete]
+ 
 
   # Index action to render all tasks
   def index
@@ -21,6 +22,7 @@ class TasksController < ApplicationController
   # Create action saves the task into database
   def create
     @task = Task.new(task_params)
+    #@comment = @task.comments.new params[:content]
     if @task.save
       flash[:notice] = "Successfully created task!"
       redirect_to task_path(@task)
@@ -47,7 +49,8 @@ class TasksController < ApplicationController
 
   # The show action renders the individual task after retrieving the the id
   def show
-    @comments = Comment.where(task_id: params[:id])
+    find_task
+    @comments = @task.comments
   end
 
   # The destroy action removes the task permanently from the database

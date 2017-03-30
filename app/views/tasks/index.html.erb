@@ -35,7 +35,7 @@
               <% @tasks.each do |task| %>
               <tr>
                 <td><%= task.id %></td>
-                <td><%= raw(task.body).truncate(358) %></td>
+                <td><%= raw(task.title).truncate(358) %></td>
                 <!--<td><%= task.recorded_at.to_s(:custom_datetime) %></td>
                 <td><%= task.updated_at.to_s(:custom_datetime) %></td>-->
                 <td olspan="3">
