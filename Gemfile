@@ -54,3 +54,6 @@ gem 'ckeditor', '~> 4.1'
 gem 'devise'
 gem 'carrierwave'
 gem 'mini_magick'
+
+#pagination
+gem 'kaminari'

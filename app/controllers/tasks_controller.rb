@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   # Index action to render all tasks
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order("id").page(params[:page]).per(5)
     respond_to do |format|
       format.html
       format.csv { send_data @tasks.to_csv }
@@ -22,7 +22,6 @@ class TasksController < ApplicationController
   # Create action saves the task into database
   def create
     @task = Task.new(task_params)
-    #@comment = @task.comments.new params[:content]
     if @task.save
       flash[:notice] = "Successfully created task!"
       redirect_to task_path(@task)
@@ -50,7 +49,7 @@ class TasksController < ApplicationController
   # The show action renders the individual task after retrieving the the id
   def show
     find_task
-    @comments = @task.comments
+    @comments = @task.comments.page(params[:page]).per(5)
   end
 
   # The destroy action removes the task permanently from the database
