@@ -3,11 +3,11 @@
 
   <div class="container">
 
-    <div class="panel panel-default">
+    <div class="panel panel-info">
       
       <div class="panel-heading">
         <h4><%= @task.id.to_s %> - <%= @task.title %></h4>
-        <h6><em>Created on <%= @task.recorded_at.strftime('%d %B %Y') %> at <%= @task.recorded_at.strftime('%H:%M') %>&nbsp;&nbsp;/&nbsp;&nbsp;Updated on <%= @task.updated_at.strftime('%d %B %Y') %> at <%= @task.updated_at.strftime('%H:%M') %></em></h6>
+        <h6><em>Created on <%= @task.recorded_at.strftime('%A %d %B %Y') %> at <%= @task.recorded_at.strftime('%H:%M %p') %>&nbsp;&nbsp;/&nbsp;&nbsp;Updated on <%= @task.updated_at.strftime('%A %d %B %Y') %> at <%= @task.updated_at.strftime('%H:%M %p') %></em></h6>
       </div>
       
       <div class="panel-body">
@@ -16,15 +16,17 @@
   
     </div>
   
+    <% if admin_signed_in? %>
+      <hr />
+      <%= render "comments/form" %>
+    <% end %>
+
   </div>
 
  <div class="container">
-
+    <hr />
     <div class="row">
       <%= render "comments/index" %>
-      <% if admin_signed_in? %>
-        <%= render "comments/form" %>
-      <% end %>
     </div>
     
   </div>
