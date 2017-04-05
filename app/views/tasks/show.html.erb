@@ -1,25 +1,32 @@
 <div class="page-wrapper">
 
 
-  <div class="row">
-      <div class="col-lg-12">
-    
+  <div class="container">
+
+    <div class="panel panel-default">
+      
+      <div class="panel-heading">
+        <h4><%= @task.id.to_s %> - <%= @task.title %></h4>
         <h6><em>Created on <%= @task.recorded_at.strftime('%d %B %Y') %> at <%= @task.recorded_at.strftime('%H:%M') %>&nbsp;&nbsp;/&nbsp;&nbsp;Updated on <%= @task.updated_at.strftime('%d %B %Y') %> at <%= @task.updated_at.strftime('%H:%M') %></em></h6>
-
-        <h1 class="page-header"><%= @task.id.to_s %> - <%= @task.title %></h1>
-    
-        <div class="panel-body">
-          <p><%= raw @task.body %></p>
-        </div>
-        
-        <div class="row">
-          <%= render "comments/index" %>
-          <% if admin_signed_in? %>
-            <%= render "comments/form" %>
-          <% end %>
-        </div>
-
       </div>
+      
+      <div class="panel-body">
+        <%= raw @task.body %>
+      </div>
+  
+    </div>
+  
   </div>
 
+ <div class="container">
+
+    <div class="row">
+      <%= render "comments/index" %>
+      <% if admin_signed_in? %>
+        <%= render "comments/form" %>
+      <% end %>
+    </div>
+    
+  </div>
+  
 </div>
