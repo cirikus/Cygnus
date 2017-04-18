@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 
+  before_action :find_task, only: [:create, :destroy, :last_comment]
+
 	def create
-    @task = Task.find params[:task_id]
     @comment = @task.comments.new(comment_params)
     if @comment.save
     	flash[:notice] = "Successfully created comment!"
@@ -13,7 +14,6 @@ class CommentsController < ApplicationController
 
 # The destroy action removes the task permanently from the database
   def destroy
-    @task = Task.find params[:task_id]
     @comment = @task.comments.find(params[:id])
     if @comment.destroy
       flash[:notice] = "Successfully deleted comment!"
@@ -23,13 +23,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Search last comment of one task
+  def last_comment
+      @comment = @task.comments.last
+  end
+
   private
 
   def comment_params
     params.require(:comment).permit(:content)
   end
 
-  def find_comment
-    @comment = Comment.find(params[:id])
+  def find_task
+    @task = Task.find params[:task_id]
   end 
 end
