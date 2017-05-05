@@ -14,5 +14,16 @@ class Comment < ApplicationRecord
   	def self.last_comment(task)
   		task.comments.last
  	end
+ 	
+    #Return user which has created comment of task
+    def user_of_comment
+      comment = Comment.find(self)
+      if !comment.nil?
+        admin = Admin.find(comment.admin_id)
+        if !admin.nil?
+          admin.first_name << " " << admin.last_name
+        end
+      end
+    end
 
 end

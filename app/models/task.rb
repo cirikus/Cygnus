@@ -20,6 +20,17 @@ class Task < ApplicationRecord
       end
     end
     
+    #Return user which has created task
+    def user_of_task
+      task = Task.find(self)
+      if !task.nil?
+        admin = Admin.find(task.admin_id)
+        if !admin.nil?
+          admin.first_name << " " << admin.last_name
+        end
+      end
+    end
+    
     def self.to_csv(options = {})
       CSV.generate(options) do |csv|
         csv << column_names
