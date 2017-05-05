@@ -3,19 +3,30 @@
 
   <div class="container">
 
-    <div class="panel panel-info">
+    <div class="panel panel-default widget">
       
-      <div class="panel-heading">
-        <h4><%= @task.id.to_s %> - <%= @task.title %></h4>
-        <h6><em>Created on <%= @task.recorded_at.strftime('%A %d %B %Y') %> at <%= @task.recorded_at.strftime('%H:%M %p') %>&nbsp;&nbsp;/&nbsp;&nbsp;Updated on <%= @task.updated_at.strftime('%A %d %B %Y') %> at <%= @task.updated_at.strftime('%H:%M %p') %></em></h6>
+      <div class="row">
+        <div class="col-xs-2 col-md-1 text-center bck-grey">
+          <h1><%= @task.id.to_s %></h1>
+        </div>
+                      
+        <div class="col-xs-10 col-md-11">
+          <div>
+            <span class="panel-title-bold"><%= @task.title %></span>
+            <div class="mic-info">
+              By: xxxxxxxxxx on <%= @task.created_at.to_s(:custom_datetime) %>
+              <% if !@task.date_of_last_comment.nil? %>
+                / Last comment on <%= @task.date_of_last_comment %>
+              <% end %>
+            </div>
+          </div>
+          <div class="comment-text">
+            <%= @task.body %>
+          </div>
+        </div>
       </div>
-      
-      <div class="panel-body">
-        <%= raw @task.body %>
-      </div>
-  
     </div>
-  
+                  
     <% if admin_signed_in? %>
       <hr />
       <%= render "comments/form" %>

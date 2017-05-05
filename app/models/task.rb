@@ -7,7 +7,6 @@ class Task < ApplicationRecord
     #This validates presence of body
     validates :body, presence: true
 
-
     #Return number of comment for one task
     def count_of_comment
       Comment.number_of_comment(self)
