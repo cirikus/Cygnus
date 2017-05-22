@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
 	def create
     @comment = @task.comments.new(comment_params)
+    @comment.admin_id = current_admin.id
     if @comment.save
     	flash[:notice] = "Successfully created comment!"
     else
@@ -15,6 +16,7 @@ class CommentsController < ApplicationController
 # The destroy action removes the task permanently from the database
   def destroy
     @comment = @task.comments.find(params[:id])
+    @comment.admin_id = current_admin.id
     if @comment.destroy
       flash[:notice] = "Successfully deleted comment!"
       redirect_to task_path(@task)

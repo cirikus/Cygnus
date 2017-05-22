@@ -1,14 +1,37 @@
 <% if @comments %>
     <div class = "container">
         <h6><u><%= @task.count_of_comment %> comment(s)</u></h6>
+      
         <% @comments.each do |comment| %>
-                <p>
-            		<% if admin_signed_in? %>
-                    	<%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, task_comment_path(comment.task_id, comment.id),:method => :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-xs btn-danger corner" %>
-                    <% end %>	
-                    <strong>By <%= comment.user_of_comment %> on <%= comment.created_at.to_s(:custom_date) %> at <%= comment.created_at.to_s(:custom_time) %></strong>: <%= comment.content %>
-                </p>
+        
+            <div class="widget">
+      
+                <div class="row">
+                      
+                    <div class="col-xs-10 col-md-11">
+                        <div>
+                            <div class="mic-info">
+                                By <%= comment.user_of_comment %> on <%= comment.created_at.to_s(:custom_date) %>
+                            </div>
+                        </div>
+                        <div class="comment-text">
+                            <%= comment.content %>
+                        </div>
+                        <div class="action">
+                            <% if admin_signed_in? %>
+                          	    <%= link_to "<i class='glyphicon glyphicon-remove'></i>".html_safe, task_comment_path(comment.task_id, comment.id),:method => :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-xs btn-danger corner" %>
+                            <% end %>
+                        </div>
+                    </div>
+                    
+                </div>
+             
+            </div>
+        
+            <hr />
+        
         <% end %>
+              
     </div>
            
     <!--Pagination-->

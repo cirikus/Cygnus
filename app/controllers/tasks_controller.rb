@@ -22,6 +22,7 @@ class TasksController < ApplicationController
   # Create action saves the task into database
   def create
     @task = Task.new(task_params)
+    @task.admin_id = current_admin.id
     if @task.save
       flash[:notice] = "Successfully created task!"
       redirect_to task_path(@task)
