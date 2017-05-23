@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505125415) do
+ActiveRecord::Schema.define(version: 20170522140457) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 20170505125415) do
     t.index ["task_id"], name: "index_comments_on_task_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string   "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "created_at"], name: "index_statuses_on_id_and_created_at"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -63,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170505125415) do
     t.datetime "updated_at",  null: false
     t.datetime "recorded_at"
     t.integer  "admin_id"
+    t.integer  "status_id"
     t.index ["id", "created_at"], name: "index_tasks_on_id_and_created_at"
   end
 
